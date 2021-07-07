@@ -13,17 +13,37 @@
 <body>
     <div class="container">
         <div class="content">
+            <div className="logo fadeInDown">
+                ТИТ-Тетимов
+            </div>
+            <div className="loginText fadeInDown">ВХОД</div>
+            <form name="login" action="" method="post">
+                <div class="form-group">
+                    <label for="username">ИМЕЙЛ ИЛИ ТЕЛ.НОМЕР:</label>
+                    <input name="username" type="text" class="form-control" placeholder="Enter email or number:" required/>
+                </div>
 
+                <div class="form-group">
+                    <label for="password">ПАРОЛА:</label>
+                    <input name="password" type="password" minlength="8" maxlength="8" size="8" class="form-control" placeholder="Enter password:" required/>
+                    <label id="error">{{ message }}</label>
+                </div>
+                <button type="submit" id="button" class="btn btn-primary">Sing in</button>
+            </form>
+            <br>
+            <p>НЯМАТЕ ПРОФИЛ? <a
+                href="/register">РЕГИСТРАЦИЯ</a>
+            </p>
         </div>
     </div>
 
-    <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <script type="text/babel" src="../static/js/Login&Register/login.js"></script>
-    <script type="text/babel">
-        ReactDOM.render(<Login/>, document.querySelector('.content'))
-    </script>
+{#    <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>#}
+{#    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>#}
+{#    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>#}
+{##}
+{#    <script type="text/babel" src="../static/js/Login&Register/login.js"></script>#}
+{#    <script type="text/babel">#}
+{#        ReactDOM.render(<Login/>, document.querySelector('.form'))#}
+{#    </script>#}
 </body>
 </html>

@@ -2,27 +2,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel = "stylesheet" href="/static/css/home.css">
+
     <title>"ТИТ-Тетимов" ЕООД</title>
 </head>
 <body>
-    <div class="container">
-        <div class="login-page">
-            <a href="/login">login</a>
-            <a href="/register">register</a>
+    <nav class="navbar navbar-inverse" id="start">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">ТИТ-Тетимов</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="#"> ЗА НАС</a></li>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">ПРОДУКТИ<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">СТОЛОВЕ</a></li>
+                        <li><a href="#">МАСИ И СТОЛОВЕ</a></li>
+                        <li><a href="#">КУХНИ</a></li>
+                        <li><a href="#">ГАРДЕРОБИ</a></li>
+                        <li><a href="#">СПАЛНИ</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"> КОНТАКТИ</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> ВХОД</a></li>
+                <li><a href="/register"><span class="glyphicon glyphicon-pencil"></span> РЕГИСТРАЦИЯ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="slideshow-container">
+
+    <div class="mySlides fade">
+        <img src="/static/images/img_1.png" class="image" style="width:100%">
+        <div class="middle">
+            <div class="text"><a href="http://127.0.0.1:5000/">КЪМ ПРОДУКТА</a></div>
         </div>
     </div>
 
-    <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <div class="mySlides fade">
+        <img src="/static/images/img_2.png" class="image" style="width:100%">
+        <div class="middle">
+            <div class="text"><a href="http://127.0.0.1:5000/">КЪМ ПРОДУКТА</a></div>
+        </div>
+    </div>
 
-{#    <script type="text/babel" src="../static/js/Login&Register/login.js"></script>#}
+    <div class="mySlides fade">
+        <img src="/static/images/img_3.png" class="image" style="width:100%">
+        <div class="middle">
+            <div class="text"><a href="http://127.0.0.1:5000/">КЪМ ПРОДУКТА</a></div>
+        </div>
+    </div>
+
+    <div class="mySlides fade">
+        <img src="/static/images/img_4.png" class="image" style="width:100%">
+        <div class="middle">
+            <div class="text"><a href="http://127.0.0.1:5000/register">КЪМ ПРОДУКТА</a></div>
+        </div>
+    </div>
+
+    </div>
+    <br>
+    <div class="dots" style="text-align:center; width: 100%;">
+        <span class="dot" onclick="dot(1)"></span>
+        <span class="dot" onclick="dot(2)"></span>
+        <span class="dot" onclick="dot(3)"></span>
+        <span class="dot" onclick="dot(4)"></span>
+    </div>
+
+    <div id="text">
+        Благодарение на съвместната работа на фирмения дизайнерски и конструктивен отдел, клиентите ни получават от нас уникални интериорни решения по индивидуален проект: маси, столове, кухни, спални комплекти, обзавеждане за дневна, детска стая, антре и други мебели по поръчка. За да гарантираме най-добро качество на нашите мебели, използваме висококачествена дървесина – бук, дъб, чам и MDF и работим с доказани италиански и шведски материали - водни байцове, грундове, лакове и лепилка на Sirca, Milesi и Becker Acroma.
+    </div>
+    <div class="footer">
+        <nav class="navbar-wrapper navbar-inverse " style="float: bottom; position: relative">
+            <div class="container-fluid">
+                <p class="navbar-text pull-left" style="font-size: 15px">2021 © "ТИТ - ТЕТИМОВ" ЕООД - Велинград. Всички права запазени</p>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#start"><span class="glyphicon glyphicon-chevron-up" style="font-size: 20px;"></span></a></li>
+                    <li></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+
+    <script>
+        var slideIndex = 0;
+        showSlides();
+        function dot(a){
+             slideIndex = a-1;
+        }
+
+        function showSlides() {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            setTimeout(showSlides,4000);
+        }
+    </script>
+
+{#    <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>#}
+{#    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>#}
+{#    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>#}
+{##}
+{#    <script type="text/babel" src="../static/js/Home&Main%20pages/home.js"></script>#}
 {#    <script type="text/babel">#}
-{#        ReactDOM.render(<Login/>, document.querySelector('.login-page'))#}
+{#        ReactDOM.render(<Home/>, document.querySelector('.content'))#}
 {#    </script>#}
+
 </body>
 </html>

@@ -12,25 +12,25 @@ def home():
 @app.route("/login", methods=["GET", "POST"])
 def check():
     if request.method == "POST":
-        username = request.form["Username"]
-        password = request.form["Password"]
+        username = request.form.get("username")
+        password = request.form.get("password")
         login = database.Login(username, password)
+
         if login == 1:
-            print(2)
             return render_template("home.html")
         else:
-            print(3)
             return render_template("login.html", message=login)
-    return render_template("login.html", message="1")
+
+    return render_template("login.html", message="")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-        username = request.form["Username"]
-        number = request.form["Number"]
-        email = request.form["Email"]
-        password = request.form["Password"]
-        repassword = request.form["Repassword"]
+        username = request.form.get("username")
+        number = request.form.get("number")
+        email = request.form.get("email")
+        password = request.form.get("password")
+        repassword = request.form.get("repassword")
 
         if password == repassword:
             accounts = database.getAccounts()

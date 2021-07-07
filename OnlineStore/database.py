@@ -7,7 +7,7 @@ def CreateTablePerson():
     try:
         cur.execute('''create table Person (id integer auto_increment primary key, Username varchar(16) not null, Email varchar(45) not null unique , Number varchar(15) unique , Password varchar(8) not null);''')
     except:
-        print(1)
+        pass
 
 def getAccounts():
     cur.execute('''select Email, Number from Person''')

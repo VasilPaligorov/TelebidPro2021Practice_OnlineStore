@@ -13,17 +13,51 @@
 <body>
     <div class="container">
         <div class="content">
-
+                <div className="logo fadeInDown">
+                    ТИТ-Тетимов
+                </div>
+                <div className="loginText fadeInDown">РЕГИСТРАЦИЯ</div>
+                <form name="register" method="post">
+                    <div class="form-group">
+                        <label for="username">ИМЕ:</label>
+                        <input name="username" type="text" minlength="6" maxlength="16" size="6-16" class="form-control" placeholder="Enter username:" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="number">ТЕЛ.НОМЕР(НЕЗАДЪЛЖИТЕЛНО):</label>
+                        <input type="number" name="number" class="form-control" placeholder="Enter number(optional):"/>
+                        <label id="error">{{message2}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">ИМЕЙЛ:</label>
+                        <input name="email" type="email" class="form-control" placeholder="Enter email or email:" required/>
+                        <label id="error">{{message1}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">ПАРОЛА:</label>
+                        <input name="password" type="password" minlength="8" maxlength="8" size="8" class="form-control" placeholder="Enter password:" required/>
+                        <label id="error">{{message3}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="repassword">ПОВТОРЕТЕ ПАРОЛАТА:</label>
+                        <input name="repassword" type="password" minlength="8" maxlength="8" size="8" class="form-control" placeholder="Re-enter password:" required/>
+                        <label id="error">{{message3}}</label>
+                    </div>
+                    <button type="submit" id="button" class="btn btn-primary">Sing up</button>
+                </form>
+                <br>
+                <p>ВЕЧЕ СТЕ РЕГИСТРИРАН? <a
+                    href="/login">ВХОД</a>
+                </p>
         </div>
     </div>
 
-    <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <script type="text/babel" src="../static/js/Login&Register/register.js"></script>
-    <script type="text/babel">
-        ReactDOM.render(<Register/>, document.querySelector('.content'))
-    </script>
+{#    <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>#}
+{#    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>#}
+{#    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>#}
+{##}
+{#    <script type="text/babel" src="../static/js/Login&Register/register.js"></script>#}
+{#    <script type="text/babel">#}
+{#        ReactDOM.render(<Register/>, document.querySelector('.content'))#}
+{#    </script>#}
 </body>
 </html>
