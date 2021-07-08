@@ -33,4 +33,9 @@ def Login(Username, Password):
     for x in accounts:
         if x[0] == Username and x[1] == Password:
             return 1
-    return "Account not found!"
+
+    for x in accounts:
+        if x[0] == Username:
+            return "ГРЕШНА ПАРОЛА!"
+
+    return "АКАУНТЪТ НЕ Е НАМЕРЕН!"

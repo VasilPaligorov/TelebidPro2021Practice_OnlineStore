@@ -10,7 +10,7 @@ def home():
     return render_template("home.html")
 
 @app.route("/login", methods=["GET", "POST"])
-def check():
+def login():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
@@ -36,15 +36,15 @@ def register():
             accounts = database.getAccounts()
             for x in accounts:
                 if x[0] == email:
-                    message = "This email is taken!"
+                    message = "ТОЗИ ИМЕЙ Е ЗАЕТ!"
                     return render_template("register.html", message1=message, message2="", message3="")
                 if x[1] == number:
-                    message = "This number is taken!"
+                    message = "ТОЗИ НОМЕР Е ЗАЕТ!"
                     return render_template("register.html", message1="", message2=message, message3="")
             database.Register(username, email, number, repassword)
             return render_template("home.html")
         else:
-            message = "Both passwords don't match!"
+            message = "ДВЕТЕ ПАРОЛИ НЕ СЪВПАДАТ!"
             return render_template("register.html", message1="", message2="", message3=message)
     return render_template("register.html", message1="", message2="", message3="")
 

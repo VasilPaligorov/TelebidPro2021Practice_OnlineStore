@@ -146,3 +146,21 @@ a:hover{
   alignment: bottom;
   align-items: end;
 }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #d4d2d2;
+
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #222;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
