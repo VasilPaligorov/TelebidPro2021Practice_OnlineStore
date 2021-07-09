@@ -5,7 +5,7 @@ cur = con.cursor()
 
 def CreateTablePerson():
     try:
-        cur.execute('''create table Person (id integer auto_increment primary key, Username varchar(16) not null, Email varchar(45) not null unique , Number varchar(15) unique , Password varchar(8) not null);''')
+        cur.execute('''create table Person (id integer auto_increment primary key, Username varchar(16) not null, Email text not null unique , Number text unique , Password varchar(8) not null);''')
     except:
         pass
 
@@ -39,3 +39,25 @@ def Login(Username, Password):
             return "ГРЕШНА ПАРОЛА!"
 
     return "АКАУНТЪТ НЕ Е НАМЕРЕН!"
+
+def getUsername(email):
+    try:
+        int(email)
+        cur.execute('''select Username from Person where Number=?''', (email,))
+    except:
+        cur.execute('''select Username from Person where Email=?''', (email,))
+
+    username = cur.fetchone()
+    for x in username:
+        print(x)
+    return username[0]
+
+def getAccountInfo(email):
+    try:
+        int(email)
+        cur.execute('''select * from Person where Number=?''', (email,))
+    except:
+        cur.execute('''select * from Person where Email=?''', (email,))
+
+    account = cur.fetchone()
+    return account
