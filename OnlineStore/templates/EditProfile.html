@@ -1,23 +1,21 @@
+<!DOCTYPE html>
 <html lang="bg">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>"ТИТ-Тетимов" ЕООД РЕГИСТРАЦИЯ</title>
-
-    <link rel = "stylesheet" href="/static/css/register.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>ПРОФИЛ</title>
+    <link rel="stylesheet" href="/static/css/Profile.css">
 </head>
 <body>
-    <div class="bg"></div>
-    <div class="container">
-        <div class="content">
-            <div class="login&register" style="text-align: center;">
-                <a href="/login" class="loginbutton">ВХОД</a>
-                <a href="/register" class="registerbutton">РЕГИСТРАЦИЯ</a>
-            </div>
-                <div className="loginText fadeInDown" style="text-align: center; margin-bottom: 5%; margin-top: 5%; font-size: 35px">РЕГИСТРАЦИЯ</div>
-                <form name="register" method="post">
+<div>
+    <div class="content">
+        <div class="container">
+            <h1>ПРОФИЛ:ИНФОРМАЦИЯ</h1>
+               <form name="register" method="post">
                     <div class="form-group">
                         <label for="username">ИМЕ:</label>
                         <input name="username" type="text" value="{{ username }}" minlength="6" maxlength="16" size="6-16" class="form-control" placeholder="Enter username:" required/>
@@ -42,10 +40,18 @@
                         <input name="repassword" type="password" value="{{ repassword }}" minlength="8" maxlength="8" size="8" class="form-control" placeholder="Re-enter password:" required/>
                         <label id="error" style="font-size: 18px">{{message3}}</label>
                     </div>
-                    <button type="submit" id="button">РЕГИСТРИРАНЕ</button>
+
+                    <button type="submit" id="button" style="float: right" onclick="window.location.href='/';">
+                        ЗАПАЗИ
+                    </button>
                 </form>
-                <a href="/"><i class="fa fa-home" style="float: right; font-size: 40px; color: #222222"></i></a>
+            <button onclick="window.location.href='http://127.0.0.1:5000/profile';">
+                 НАЗАД
+            </button>
         </div>
     </div>
+</div>
+
+
 </body>
 </html>

@@ -21,18 +21,18 @@
             <form name="login" action="" method="post">
                 <div class="form-group">
                     <label for="username">ИМЕЙЛ ИЛИ ТЕЛ.НОМЕР:</label>
-                    <input name="username" type="text" class="form-control" placeholder="Enter email or number:" required/>
+                    <input name="username" type="text" value="{{ username }}" class="form-control" placeholder="Enter email or number:" required/>
                 </div>
 
                 <div class="form-group">
                     <label for="password">ПАРОЛА:</label>
-                    <input name="password" type="password" minlength="8" maxlength="8" size="8" class="form-control" placeholder="Enter password:" required/>
+                    <input name="password" type="password" value="{{ password }}" minlength="8" maxlength="8" size="8" class="form-control" placeholder="Enter password:" required/>
                     <label id="error">{{ message }}</label>
                 </div>
                 <button type="submit" id="button">ВХОД</button>
                 <br>
             </form>
-            <a href="/"><i class="fa fa-shopping-cart" style="float: right; font-size: 40px; color: #222222"></i></a>
+            <a href="/"><i class="fa fa-home" style="float: right; font-size: 40px; color: #222222"></i></a>
         </div>
     </div>
 </body>

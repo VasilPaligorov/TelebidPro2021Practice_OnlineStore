@@ -5,7 +5,7 @@ cur = con.cursor()
 
 def CreateTablePerson():
     try:
-        cur.execute('''create table Person (id integer auto_increment primary key, Username varchar(16) not null, Email text not null unique , Number text unique , Password varchar(8) not null);''')
+        cur.execute('''create table Person (id integer primary key autoincrement, Username varchar(16) not null, Email text not null unique , Number text unique , Password varchar(8) not null);''')
     except:
         pass
 
@@ -61,3 +61,8 @@ def getAccountInfo(email):
 
     account = cur.fetchone()
     return account
+
+def deleteAccount(email):
+    account = getAccountInfo(email)
+    cur.execute('''delete from Person where Email=? ''', (account[2],))
+    con.commit()
