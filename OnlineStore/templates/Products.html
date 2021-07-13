@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="utf-8">
+    <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <title>ПРОДУКТИ: {{ category }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel = "stylesheet" href="/static/css/Products.css">
+
+</head>
+<body>
+{% block content %}
+<nav class="navbar navbar-inverse" id="start">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">ТИТ-Тетимов</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="#"> ЗА НАС</a></li>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="">ПРОДУКТИ<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/products/chairs">СТОЛОВЕ</a></li>
+                        <li><a href="/products/tables">МАСИ И СТОЛОВЕ</a></li>
+                        <li><a href="/products/kitchens">КУХНИ</a></li>
+                        <li><a href="/products/wardrobes">ГАРДЕРОБИ</a></li>
+                        <li><a href="/products/beds">СПАЛНИ</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"> КОНТАКТИ</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> КОШНИЦА</a></li>
+                <li><a href="/profile"><span class="glyphicon glyphicon-user"></span> ПРОФИЛ: {{ username }}</a></li>
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> ИЗХОД</a></li>
+            </ul>
+        </div>
+    </nav>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="content">
+    <div class="container">
+        {% for product in products %}
+            <div class="col-xs-12 col-md-6 bootstrap snippets bootdeys">
+            <!-- product -->
+            <div class="product-content product-wrap clearfix">
+                <div class="row">
+                        <div class="col-md-5 col-sm-12 col-xs-12">
+                            <div class="product-image">
+                                <img src="https://via.placeholder.com/194x228/87CEFA" alt="194x228" class="img-responsive">
+{#                                <span class="tag2 hot">#}
+{#                                    HOT#}
+{#                                </span>#}
+                            </div>
+                        </div>
+                        <div class="col-md-7 col-sm-12 col-xs-12">
+                        <div class="product-deatil">
+                                <h5 class="name">
+                                    <a href="#">
+                                        {{ product[1] }} <span>{{ product[3] }}</span>
+                                    </a>
+                                </h5>
+                                <p class="price-container">
+                                    <span>{{ product[4] }}лв.</span>
+                                </p>
+                                <span class="tag1"></span>
+                        </div>
+                        <div class="description">
+                            <p>{{ product[5] }} </p>
+                        </div>
+                        <div class="product-info smart-form">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-6" style="position: center; margin-left: 10%">
+                                    <a href="javascript:void(0);" class="btn btn-success" style="position: center">ДОБАВИ В КОЛИЧКАТА</a>
+                                </div>
+{#                                <div class="col-md-6 col-sm-6 col-xs-6">#}
+{#                                    <div class="rating">#}
+{#                                        <label for="stars-rating-5"><i class="fa fa-star"></i></label>#}
+{#                                        <label for="stars-rating-4"><i class="fa fa-star"></i></label>#}
+{#                                        <label for="stars-rating-3"><i class="fa fa-star text-primary"></i></label>#}
+{#                                        <label for="stars-rating-2"><i class="fa fa-star text-primary"></i></label>#}
+{#                                        <label for="stars-rating-1"><i class="fa fa-star text-primary"></i></label>#}
+{#                                    </div>#}
+{#                                </div>#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end product -->
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="footer">
+    <nav class="navbar-wrapper navbar-inverse " style="float: bottom; position: relative">
+        <div class="container-fluid">
+            <p class="navbar-text pull-left" style="font-size: 15px">2021 © "ТИТ - ТЕТИМОВ" ЕООД - Велинград. Всички права запазени</p>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#start"><span class="glyphicon glyphicon-chevron-up" style="font-size: 20px;"></span></a></li>
+                <li></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+{% endblock %}
+</body>
+</html>

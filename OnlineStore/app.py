@@ -3,7 +3,8 @@ from flask import render_template, request, url_for
 import database
 
 app = Flask(__name__)
-database.CreateTablePerson()
+database.CreateTableUser()
+database.CreateTableProduct()
 app.secret_key = "08859V.P.71086"
 
 @app.route('/')
@@ -86,11 +87,53 @@ def editProfile():
                     return render_template("EditProfile.html", message1="", message2=message, message3="", username=username, number=number, email=email, password=password, repassword=repassword)
             database.deleteAccount(info[2])
             database.Register(username, email, number, repassword)
+            session["email"] = email
             return render_template("Profile.html", username=username, email=email, number=number)
         else:
             message = "ДВЕТЕ ПАРОЛИ НЕ СЪВПАДАТ!"
             return render_template("EditProfile.html", message1="", message2="", message3=message, username=username, number=number, email=email, password=password, repassword=repassword)
     return render_template("EditProfile.html", username=info[1], email=info[2], number=info[3], password=info[4], repassword=info[4], message1="", message2="", message3="")
+
+
+@app.route('/products/chairs')
+def Chairs():
+    username = database.getUsername(session["email"])
+    products = database.getProducts('chair')
+    return render_template("Products.html", username=username, products=products, category='СТОЛОВЕ')
+
+
+@app.route('/products/tables')
+def Tables():
+    username = database.getUsername(session["email"])
+    products = database.getProducts('table')
+    return render_template("Products.html", username=username, products=products, category='МАСИ И СТОЛОВЕ')
+
+
+@app.route('/products/kitchens')
+def Kitchens():
+    username = database.getUsername(session["email"])
+    products = database.getProducts('kitchen')
+    return render_template("Products.html", username=username, products=products, category='КУХНИ')
+
+
+@app.route('/products/wardrobes')
+def Wardrobes():
+    username = database.getUsername(session["email"])
+    products = database.getProducts('wardrobe')
+    return render_template("Products.html", username=username, products=products, category='ГАРДЕРОБИ')
+
+
+@app.route('/products/beds')
+def Beds():
+    username = database.getUsername(session["email"])
+    products = database.getProducts('bed')
+    return render_template("Products.html", username=username, products=products, category='ЛЕГЛА')
+
+
+@app.route("/logout")
+def logout():
+    session.pop('email', None)
+    return render_template("home.html")
 
 
 if __name__ == '__main__':
