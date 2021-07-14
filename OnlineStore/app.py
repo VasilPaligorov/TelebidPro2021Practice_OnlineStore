@@ -3,6 +3,7 @@ from flask import render_template, request, url_for
 import database
 
 app = Flask(__name__)
+database.CreateTableStuff()
 database.CreateTableUser()
 database.CreateTableProduct()
 app.secret_key = "08859V.P.71086"
@@ -17,9 +18,13 @@ def login():
         username = request.form.get("username")
         password = request.form.get("password")
         login = database.Login(username, password)
+        stuff = database.StuffLogin(username, password)
         if login == 1:
             session["email"] = username
             return logged_in()
+        elif stuff == 1:
+            session["email"] = username
+            return logged_in_stuff()
         else:
             return render_template("login.html", message=login, username=username, password=password)
 
@@ -36,6 +41,7 @@ def register():
 
         if password == repassword:
             accounts = database.getAccounts()
+            stuffAccounts = database.getStuffAccounts()
             for x in accounts:
                 if x[0] == email:
                     message = "ТОЗИ ИМЕЙ Е ЗАЕТ!"
@@ -43,6 +49,10 @@ def register():
                 if x[1] == number:
                     message = "ТОЗИ НОМЕР Е ЗАЕТ!"
                     return render_template("register.html", message1="", message2=message, message3="", username=username, number=number, email=email, password=password, repassword=repassword)
+            for x in stuffAccounts:
+                if x[0] == email:
+                    message = "ТОЗИ ИМЕЙ Е ЗАЕТ!"
+                    return render_template("register.html", message1=message, message2="", message3="", username=username, number=number, email=email, password=password, repassword=repassword)
             database.Register(username, email, number, repassword)
             return render_template("login.html", message="")
         else:
@@ -78,6 +88,7 @@ def editProfile():
 
         if password == repassword:
             accounts = database.getAccounts()
+            stuffAccounts = database.getStuffAccounts()
             for x in accounts:
                 if x[0] == email and email != info[2]:
                     message = "ТОЗИ ИМЕЙ Е ЗАЕТ!"
@@ -85,6 +96,10 @@ def editProfile():
                 if x[1] == number and number != info[3]:
                     message = "ТОЗИ НОМЕР Е ЗАЕТ!"
                     return render_template("EditProfile.html", message1="", message2=message, message3="", username=username, number=number, email=email, password=password, repassword=repassword)
+            for x in stuffAccounts:
+                if x[0] == email:
+                    message = "ТОЗИ ИМЕЙ Е ЗАЕТ!"
+                    return render_template("register.html", message1=message, message2="", message3="", username=username, number=number, email=email, password=password, repassword=repassword)
             database.deleteAccount(info[2])
             database.Register(username, email, number, repassword)
             session["email"] = email
@@ -97,35 +112,55 @@ def editProfile():
 
 @app.route('/products/chairs')
 def Chairs():
-    username = database.getUsername(session["email"])
+    try:
+        username = database.getUsername(session["email"])
+    except:
+        username = session["email"]
+
     products = database.getProducts('chair')
     return render_template("Products.html", username=username, products=products, category='СТОЛОВЕ')
 
 
 @app.route('/products/tables')
 def Tables():
-    username = database.getUsername(session["email"])
+    try:
+        username = database.getUsername(session["email"])
+    except:
+        username = session["email"]
+
     products = database.getProducts('table')
     return render_template("Products.html", username=username, products=products, category='МАСИ И СТОЛОВЕ')
 
 
 @app.route('/products/kitchens')
 def Kitchens():
-    username = database.getUsername(session["email"])
+    try:
+        username = database.getUsername(session["email"])
+    except:
+        username = session["email"]
+
     products = database.getProducts('kitchen')
     return render_template("Products.html", username=username, products=products, category='КУХНИ')
 
 
 @app.route('/products/wardrobes')
 def Wardrobes():
-    username = database.getUsername(session["email"])
+    try:
+        username = database.getUsername(session["email"])
+    except:
+        username = session["email"]
+
     products = database.getProducts('wardrobe')
     return render_template("Products.html", username=username, products=products, category='ГАРДЕРОБИ')
 
 
 @app.route('/products/beds')
 def Beds():
-    username = database.getUsername(session["email"])
+    try:
+        username = database.getUsername(session["email"])
+    except:
+        username = session["email"]
+
     products = database.getProducts('bed')
     return render_template("Products.html", username=username, products=products, category='ЛЕГЛА')
 
@@ -134,6 +169,47 @@ def Beds():
 def logout():
     session.pop('email', None)
     return render_template("home.html")
+
+
+@app.route("/addToCart", methods=["GET", "POST"])
+def add():
+    if request.method == "POST":
+        id = request.form["Id"]
+        database.addProductToCart(id)
+    return " "
+
+
+@app.route("/stuff")
+def logged_in_stuff():
+    return render_template("logged_in_stuff.html", username=session["email"])
+
+
+@app.route("/addProduct", methods=["GET", "POST"])
+def addProduct():
+    if request.method == "POST":
+        name = request.form.get("name")
+        category = request.form.get("category")
+        price = request.form.get("price")
+        desc = request.form.get("desc")
+        print(category)
+        products = database.getProductsName()
+
+        for x in products:
+            if x[0] == name:
+                message = "ТОВА ИМЕ Е ЗАЕТО!"
+                return render_template("addProduct.html", name=name, category=category, price=price, desc=desc, message=message)
+        database.addProduct(name, category, price, desc)
+        return render_template("logged_in_stuff.html", username=session["email"])
+    return render_template("addProduct.html", name="", category="", price="", desc="", message="")
+
+
+@app.route('/ProductInfo', methods=["GET", "POST"])
+def ProductInfo():
+    if request.method == "POST":
+        id = request.form["id"]
+        info = database.getProductInfo(id)
+        for x in info:
+            return render_template(name=x[1], cat=x[3], price=x[4], desc=x[5])
 
 
 if __name__ == '__main__':

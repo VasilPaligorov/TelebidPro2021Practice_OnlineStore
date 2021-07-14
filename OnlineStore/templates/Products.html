@@ -10,6 +10,7 @@
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link rel = "stylesheet" href="/static/css/Products.css">
+    <link rel="import" href="../database.py">
 
 </head>
 <body>
@@ -42,6 +43,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="content">
     <div class="container">
+        <h1 id="up">{{ category }}: </h1>
         {% for product in products %}
             <div class="col-xs-12 col-md-6 bootstrap snippets bootdeys">
             <!-- product -->
@@ -58,8 +60,8 @@
                         <div class="col-md-7 col-sm-12 col-xs-12">
                         <div class="product-deatil">
                                 <h5 class="name">
-                                    <a href="#">
-                                        {{ product[1] }} <span>{{ product[3] }}</span>
+                                    <a href="/ProductInfo" onclick="getId({{ product[0] }})">
+                                        {{ product[1] }} <span>{{ category }}</span>
                                     </a>
                                 </h5>
                                 <p class="price-container">
@@ -73,7 +75,7 @@
                         <div class="product-info smart-form">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 col-xs-6" style="position: center; margin-left: 10%">
-                                    <a href="javascript:void(0);" class="btn btn-success" style="position: center">ДОБАВИ В КОЛИЧКАТА</a>
+                                    <a href="javascript:void(0);" class="btn btn-success" style="position: center"  onclick="addToCart({{ product[0] }})">ДОБАВИ В КОЛИЧКАТА <span class="glyphicon glyphicon-shopping-cart"></span></a>
                                 </div>
 {#                                <div class="col-md-6 col-sm-6 col-xs-6">#}
 {#                                    <div class="rating">#}
@@ -100,12 +102,41 @@
         <div class="container-fluid">
             <p class="navbar-text pull-left" style="font-size: 15px">2021 © "ТИТ - ТЕТИМОВ" ЕООД - Велинград. Всички права запазени</p>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#start"><span class="glyphicon glyphicon-chevron-up" style="font-size: 20px;"></span></a></li>
+                <li><a href="#up"><span class="glyphicon glyphicon-chevron-up" style="font-size: 20px;"></span></a></li>
                 <li></li>
             </ul>
         </div>
     </nav>
 </div>
 {% endblock %}
+
+<script>
+    function addToCart(id){
+        $.ajax({
+            url:'/addToCart',
+            type:'POST',
+            data:{'Id':id},
+            success: function (response){
+                console.log(response);
+            },
+            error: function (error){
+                console.log(error);
+            }
+        })
+    }
+    function getId(id){
+        $.ajax({
+            url:'/ProductInfo',
+            type:'POST',
+            data:{'Id':id},
+            success: function (response){
+                console.log(response);
+            },
+            error: function (error){
+                console.log(error);
+            }
+        })
+    }
+</script>
 </body>
 </html>

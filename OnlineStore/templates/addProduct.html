@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>ДОБАВЯНЕ НА ПРОДУКТ</title>
+    <link rel="stylesheet" href="/static/css/Profile.css">
+</head>
+<body>
+<div>
+    <div class="content" style="height: 70%; max-height: 70%">
+        <div class="container" >
+            <h1>ИНФОРМАЦИЯ ЗА ПРОДУКТА:</h1>
+               <form name="register" method="post">
+                    <div class="form-group">
+                        <label for="username" style="float: left">ИМЕ:</label>
+                        <input name="name" type="text" value="{{ name }}" minlength="6" maxlength="16" size="6-16" class="form-control" placeholder="Въведете уникално име на продукта:" required/>
+                        <label id="error" style="font-size: 18px">{{message}}</label>
+                    </div>
+                    <div style="margin-bottom: 15%;">
+                    <label style="float: left">КАТЕГОРИЯ:</label>
+                    <label class="cont" style="float: left">СТОЛОВЕ
+                        <input type="radio" checked="checked" name="category" value="chair">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="cont" style="float: left">МАСИ И СТОЛОВЕ
+                        <input type="radio" name="category" value="table">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="cont" style="float: left">КУХНИ
+                        <input type="radio" name="category" value="kitchen">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="cont" style="float: left">ГАРДЕРОБИ
+                        <input type="radio" name="category" value="wardrobe">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="cont" style="float: left">СПАЛНИ
+                        <input type="radio" name="category" value="bed">
+                        <span class="checkmark"></span>
+                    </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="price" style="float: left">ЦЕНА:</label>
+                        <input type="number" name="price" value="{{ price }}" class="form-control" placeholder="Цена:"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="desc" style="float: left">ОПИСАНИЕ :</label>
+                        <input name="desc" type="text" value="{{ desc }}" class="form-control" placeholder="Въведете описание на продукта:" required/>
+                    </div>
+
+                    <button type="submit" id="button" style="float: right" onclick="window.location.href='/';">
+                        СЪЗДАЙ
+                    </button>
+                </form>
+            <button onclick="window.location.href='/stuff';">
+                 НАЗАД
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
