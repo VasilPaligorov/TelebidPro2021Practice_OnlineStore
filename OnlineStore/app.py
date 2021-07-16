@@ -6,7 +6,10 @@ app = Flask(__name__)
 database.CreateTableStuff()
 database.CreateTableUser()
 database.CreateTableProduct()
+database.CreateTableCart()
+database.CreateTableOrder()
 app.secret_key = "08859V.P.71086"
+
 
 @app.route('/')
 def home():
@@ -172,10 +175,10 @@ def logout():
 
 
 @app.route("/addToCart", methods=["GET", "POST"])
-def add():
+def addToCart():
     if request.method == "POST":
         id = request.form["Id"]
-        database.addProductToCart(id)
+        database.addProductToCart(id, session["email"])
     return " "
 
 
@@ -209,7 +212,36 @@ def ProductInfo():
         id = request.form["id"]
         info = database.getProductInfo(id)
         for x in info:
-            return render_template(name=x[1], cat=x[3], price=x[4], desc=x[5])
+            return render_template("ProductInfo.html", name=x[1], cat=x[3], price=x[4], desc=x[5])
+    return render_template("logged_in.html", username=database.getUsername(session["email"]))
+
+
+@app.route('/Cart')
+def Cart():
+    id = database.getCart(session["email"])
+    info = database.getProductInfo(id)
+    return render_template("Cart.html", username=database.getUsername(session["email"]), info=info)
+
+
+@app.route("/RemoveFromCart", methods=["GET", "POST"])
+def removeFromCart():
+    if request.method == "POST":
+        id = request.form["Id"]
+        database.removeFromCart(id, session["email"])
+        return Cart()
+    return Cart()
+
+
+@app.route('/CreateOrder')
+def CreateOrder():
+    products = database.getCart(session["email"])
+    database.CreateOrder(session["email"], products)
+    return Cart()
+
+
+@app.route('/ShowOrders')
+def ShowOrders():
+    return render_template("ShowOrders.html", orders=database.getOrders(), username=session["email"])
 
 
 if __name__ == '__main__':

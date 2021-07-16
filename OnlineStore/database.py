@@ -1,4 +1,5 @@
 import sqlite3
+import random
 con = sqlite3.connect('database.db', check_same_thread=False)
 cur = con.cursor()
 
@@ -48,9 +49,9 @@ def getAccounts():
 
 def Register(Username, Email, Number, Password):
     if Number:
-        cur.execute('insert into User(Username, Email, Number, Password) values ("' + Username + '","' + Email + '","' + Number + '","' + Password + '");')
+        cur.execute('insert into User(Username, Email, Number, Password) values (?,?,?,?);', (Username, Email, Number, Password))
     else:
-        cur.execute('insert into User(Username, Email, Password) values ("' + Username + '","' + Email + '","' + Password + '");')
+        cur.execute('insert into User(Username, Email, Password) values (?,?,?);', (Username, Email, Password))
     con.commit()
 
 def Login(Username, Password):
@@ -120,24 +121,75 @@ def getProductsName():
     return products
 
 def addProduct(name, category, price, desc):
-    cur.execute('insert into Product (Name, Category, Price, Description) values ("' + name + '","' + category + '","' + price + '","' + desc + '");')
+    cur.execute('insert into Product (Name, Category, Price, Description) values (?,?,?,?);', (name, category, price, desc))
     con.commit()
 
 
 def getProductInfo(id):
-    cur.execute('''select * from Product where id = ?;''', (id, ))
-    info = cur.fetchone()
-    return info
+    try:
+        len(id)
+        cur.execute('SELECT * FROM Product WHERE id IN (%s)' % ','.join('?' * len(id)), tuple(id))
+        info = cur.fetchall()
+        return info
+    except:
+        cur.execute('''select * from Product where id = ?;''', (id, ))
+        info = cur.fetchone()
+        return info
 
 
 # <======================================= TABLE CART =======================================>
 
 
-def CreateCartTable():
+def CreateTableCart():
     try:
-        cur.execute('''create table Cart(id integer primary key autoincrement);''')
+        cur.execute('''create table Cart(id integer primary key autoincrement, Name TEXT not null, ProductId int not null, foreign key(ProductId) references Product(id));''')
+
+    except:
+        pass
+
+def addProductToCart(id, name):
+    cur.execute('insert into Cart (Name, ProductId) values (?,?);', (name, id))
+    con.commit()
+
+def getCart(name):
+    cur.execute('''select ProductId from Cart where name =? ''', (name, ))
+    ProductsId = cur.fetchall()
+    IdList = []
+    for x in ProductsId:
+        print(x)
+        for u in x:
+            print(u)
+            IdList.append(u)
+    print(IdList)
+    print(ProductsId)
+    return IdList
+
+def removeFromCart(id, name):
+    cur.execute('''delete from Cart where Name=? and  ProductId = ? Limit 1; ''', (name, id))
+    con.commit()
+
+
+# <======================================= TABLE ORDER =======================================>
+
+def CreateTableOrder():
+    try:
+        cur.execute('''create table Orders(id integer primary key autoincrement, PersonName Text not null, Products Text not null);''')
 
     except:
         pass
 
 
+def CreateOrder(Pname, PIds):
+    a = ""
+    for x in PIds:
+        a = str(a)+str(x)+" "
+    cur.execute('''INSERT INTO Orders (PersonName, Products) VALUES (?, ?)''', (Pname, a))
+    con.commit()
+    cur.execute('''delete from Cart where Name=?; ''', (Pname, ))
+    con.commit()
+
+
+def getOrders():
+    cur.execute('''select * from orders''')
+    orders = cur.fetchall()
+    return orders
